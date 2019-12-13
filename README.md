@@ -1,0 +1,2 @@
+# typebeast
+Typing Test
