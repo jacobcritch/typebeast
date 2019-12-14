@@ -1,3 +1,4 @@
+var gameText =''
 Reset();
 
 function chooseText(){
@@ -18,16 +19,16 @@ function chooseText(){
 	}
 	
 	switch(sel){
-		case 1: return phrases.phrase1;
-		case 2: return phrases.phrase2;
-		case 3: return phrases.phrase3;
-		case 4: return phrases.phrase4;
-		case 5: return phrases.phrase5;
-		case 6: return phrases.phrase6;
-		case 7: return phrases.phrase7;
-		case 8: return phrases.phrase8;
-		case 9: return phrases.phrase9;
-		case 10: return phrases.phrase10;
+		case 1: if (gameText != phrases.phrase1) {return phrases.phrase1} else{chooseText()};
+		case 2: if (gameText != phrases.phrase2) {return phrases.phrase2} else{chooseText()};
+		case 3: if (gameText != phrases.phrase3) {return phrases.phrase3} else{chooseText()};
+		case 4: if (gameText != phrases.phrase4) {return phrases.phrase4} else{chooseText()};
+		case 5: if (gameText != phrases.phrase5) {return phrases.phrase5} else{chooseText()};
+		case 6: if (gameText != phrases.phrase6) {return phrases.phrase6} else{chooseText()};
+		case 7: if (gameText != phrases.phrase7) {return phrases.phrase7} else{chooseText()};
+		case 8: if (gameText != phrases.phrase8) {return phrases.phrase8} else{chooseText()};
+		case 9: if (gameText != phrases.phrase9) {return phrases.phrase9} else{chooseText()};
+		case 10: if (gameText != phrases.phrase10) {return phrases.phrase10} else{chooseText()};
 	}
 }
 
