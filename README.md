@@ -1,6 +1,4 @@
 # typebeast
-Typing Test
-
 TypeBeast a simple pet project typing test site. 
 
 --PLANS--
