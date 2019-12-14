@@ -2,6 +2,7 @@ Reset();
 function Reset(){
 	wordCount = 0;
 	playing = false;
+	document.getElementById('gameinput').value = "";
 
 	gameText = 'The quick brown fox jumped over the long winding fence';
 	document.getElementById('gametext').innerHTML = gameText;
