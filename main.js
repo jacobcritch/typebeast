@@ -1,10 +1,42 @@
 Reset();
+
+function chooseText(){
+	sel = Math.floor((Math.random() * 10) + 1)
+	
+	var phrases =
+	{
+		phrase1: 'The quick brown fox jumped over the long winding fence',
+		phrase2: 'Sometimes, all you need to do is completely make an ass of yourself and laugh it off to realise that life isn’t so bad after all.',
+		phrase3: 'Someone I know recently combined Maple Syrup & buttered Popcorn thinking it would taste like caramel popcorn. It didn’t and they don’t recommend anyone else do it either.',
+		phrase4: 'I was very proud of my nickname throughout high school but today- I couldn’t be any different to what my nickname was.',
+		phrase5: 'If the Easter Bunny and the Tooth Fairy had babies would they take your teeth and leave chocolate for you?',
+		phrase6: 'What was the person thinking when they discovered cow\'s milk was fine for human consumption... and why did they do it in the first place!?',
+		phrase7: 'This is the last random sentence I will be writing and I am going to stop mid-sent',
+		phrase8: 'Sometimes it is better to just walk away from things and go back to them later when you’re in a better frame of mind.',
+		phrase9: 'She works two jobs to make ends meet; at least, that was her reason for not having time to join us.',
+		phrase10: 'I am happy to take your donation; any amount will be greatly appreciated.'
+	}
+	
+	switch(sel){
+		case 1: return phrases.phrase1;
+		case 2: return phrases.phrase2;
+		case 3: return phrases.phrase3;
+		case 4: return phrases.phrase4;
+		case 5: return phrases.phrase5;
+		case 6: return phrases.phrase6;
+		case 7: return phrases.phrase7;
+		case 8: return phrases.phrase8;
+		case 9: return phrases.phrase9;
+		case 10: return phrases.phrase10;
+	}
+}
+
 function Reset(){
 	wordCount = 0;
 	playing = false;
+	$('#gameinput').fadeIn();
 	document.getElementById('gameinput').value = "";
-
-	gameText = 'The quick brown fox jumped over the long winding fence';
+	gameText = chooseText();
 	document.getElementById('gametext').innerHTML = gameText;
 	gameTextArrOrg = gameText.split(" ");
 	gameTextArr = gameText.split(" ");
@@ -13,8 +45,7 @@ function Reset(){
 	document.getElementById('wpm').innerHTML = 'WPM: ?'
 }
 
-function GameLoop()
-{	
+function GameLoop(){	
 	if (playing === false){playing = true; startTime = new Date();}
 	inputElement = document.getElementById('gameinput');
 	input = inputElement.value;
@@ -27,6 +58,7 @@ function GameLoop()
 		if (wordCount === gameTextArrLength){
 			endTime = new Date();
 			document.getElementById('gameinput').disabled = true;
+			$('#gameinput').fadeOut();
 			WPM = (gameText.length / 5) / (((endTime-startTime) / 1000) / 60);
 			WPM = WPM.toString();
 			WPM = WPM.substr(0,5);
@@ -35,3 +67,4 @@ function GameLoop()
 		}
 	}
 }
+
