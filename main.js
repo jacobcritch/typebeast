@@ -7,8 +7,8 @@ function chooseText(){
 	var phrases =
 	{
 		phrase1: 'The quick brown fox jumped over the long winding fence',
-		phrase2: 'Sometimes, all you need to do is completely make an ass of yourself and laugh it off to realise that life isn’t so bad after all.',
-		phrase3: 'Someone I know recently combined Maple Syrup & buttered Popcorn thinking it would taste like caramel popcorn. It didn’t and they don’t recommend anyone else do it either.',
+		phrase2: 'Sometimes, all you need to do is completely make an ass of yourself and laugh it off to realise that life isn\'t so bad after all.',
+		phrase3: 'Someone I know recently combined Maple Syrup & buttered Popcorn thinking it would taste like caramel popcorn. It didn\'t and they don\'t recommend anyone else do it either.',
 		phrase4: 'I was very proud of my nickname throughout high school but today- I couldn\'t be any different to what my nickname was.',
 		phrase5: 'If the Easter Bunny and the Tooth Fairy had babies would they take your teeth and leave chocolate for you?',
 		phrase6: 'What was the person thinking when they discovered cow\'s milk was fine for human consumption... and why did they do it in the first place!?',
@@ -29,6 +29,7 @@ function chooseText(){
 		case 8: if (gameText != phrases.phrase8) {return phrases.phrase8} else{chooseText()};
 		case 9: if (gameText != phrases.phrase9) {return phrases.phrase9} else{chooseText()};
 		case 10: if (gameText != phrases.phrase10) {return phrases.phrase10} else{chooseText()};
+		default: {return phrases.phrase1}
 	}
 }
 

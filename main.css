@@ -1,5 +1,5 @@
 body {
-	background-color: grey;
+	background-color: gray;
 	height: 100%;
 	width: 100%;
 	text-align: center;
@@ -18,19 +18,35 @@ body {
 }
 
 #gamecontainer {
-	margin-top: 15%;
+	margin-top: 8%;
+	height: 100%;
 }
 
 #gtcontainer {
-	height:20%; //ADD THIS
+	height:30%; //ADD THIS
 	width:15%;
-	overflow: auto;
+
+	overflow-y: auto;
+	margin-bottom: 0%;
 	padding-right: 5%;
 	padding-left: 5%;
+	text-align: center;
+	align-content: center;
+	justify-content: center;
 	text-shadow: 1px 3px #000000;
 }
+
+
 
 #restcontainer {
 	padding-right: 5%;
 	padding-left: 5%;
+	align-content: center;
+	justify-content: center;
+}
+
+#gameinput {
+	justify-content: center;
+	align-self: center;
+	align-content: center;
 }
