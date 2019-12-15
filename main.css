@@ -4,3 +4,33 @@ body {
 	width: 100%;
 	text-align: center;
 }
+
+#sitewrapper {
+	height: 100%;
+	width: 100%;
+	padding-right: 0%;
+	padding-left: 0%;
+}
+
+#header {
+	background-color: black;
+	justify-content: center;
+}
+
+#gamecontainer {
+	margin-top: 15%;
+}
+
+#gtcontainer {
+	height:20%; //ADD THIS
+	width:15%;
+	overflow: auto;
+	padding-right: 5%;
+	padding-left: 5%;
+	text-shadow: 1px 3px #000000;
+}
+
+#restcontainer {
+	padding-right: 5%;
+	padding-left: 5%;
+}
