@@ -45,6 +45,7 @@ function Reset(){
 	gameTextArrLength = gameTextArr.length;
 	document.getElementById('gameinput').disabled = false;
 	document.getElementById('wpm').innerHTML = 'WPM: ?'
+	document.getElementById('wpm').style.fontSize = '';
 }
 
 function GameLoop(){	
@@ -65,6 +66,7 @@ function GameLoop(){
 			WPM = WPM.toString();
 			WPM = WPM.substr(0,5);
 			document.getElementById('wpm').innerHTML = 'WPM: ' + WPM;
+			document.getElementById('wpm').style.fontSize = '4rem';
 			wordCount = 0;
 		}
 	}
