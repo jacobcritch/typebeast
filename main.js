@@ -1,4 +1,8 @@
-var gameText =''
+var gameText = '';
+var best = 0;
+var wpmAttemptsArr = [];
+var avg = 0;
+var sum = 0;
 Reset();
 
 function chooseText(){
@@ -36,7 +40,9 @@ function chooseText(){
 function Reset(){
 	wordCount = 0;
 	playing = false;
+	sum = 0;
 	$('#gameinput').fadeIn();
+	document.getElementById('gameinput').placeholder = 'Start typing to play...';
 	document.getElementById('gameinput').value = "";
 	gameText = chooseText();
 	document.getElementById('gametext').innerHTML = gameText;
@@ -63,9 +69,16 @@ function GameLoop(){
 			document.getElementById('gameinput').disabled = true;
 			$('#gameinput').fadeOut();
 			WPM = (gameText.length / 5) / (((endTime-startTime) / 1000) / 60);
-			WPM = WPM.toString();
-			WPM = WPM.substr(0,5);
+			wpmAttemptsArr.push(WPM);
+			if (WPM > best){best = WPM;}
+			for (i=0; i < wpmAttemptsArr.length; i++){
+				sum += wpmAttemptsArr[i];
+			};
+			avg = sum/wpmAttemptsArr.length
+			WPM = WPM.toString().substr(0,5);
 			document.getElementById('wpm').innerHTML = 'WPM: ' + WPM;
+			document.getElementById('best').innerHTML = 'Your best: ' + best.toString().substr(0,5);
+			document.getElementById('average').innerHTML = 'Your average: ' + avg.toString().substr(0,5);
 			document.getElementById('wpm').style.fontSize = '4rem';
 			wordCount = 0;
 		}
