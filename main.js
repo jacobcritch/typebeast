@@ -48,7 +48,7 @@ function Reset(){
 }
 
 function GameLoop(){	
-	if (playing === false){playing = true; startTime = new Date();}
+	if (playing === false){playing = true; document.getElementById('gameinput').placeholder = ''; startTime = new Date();}
 	inputElement = document.getElementById('gameinput');
 	input = inputElement.value;
 	
