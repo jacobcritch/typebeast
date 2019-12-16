@@ -19,7 +19,7 @@ function chooseText(){
 		phrase7: 'This is the last random sentence I will be writing and I am going to stop mid-sent',
 		phrase8: 'Sometimes it is better to just walk away from things and go back to them later when you\'re in a better frame of mind.',
 		phrase9: 'She works two jobs to make ends meet; at least, that was her reason for not having time to join us.',
-		phrase10: 'I am happy to take your donation; any amount will be greatly appreciated.'
+		phrase10: 'I am happy to take your donation; any amount will be greatly appreciated.',
 	}
 	
 	switch(sel){
