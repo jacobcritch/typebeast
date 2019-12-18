@@ -24,14 +24,13 @@ body {
 }
 
 #gtcontainer {
-	height:30%; //ADD THIS
-	width:15%;
+	height:30%;
 	overflow-y: scroll;
 	margin-bottom: 0%;
 	padding-right: 5%;
 	padding-left: 5%;
 	text-align: center;
-	align-content: center;
+	align-items: center;
 	justify-content: center;
 }
 

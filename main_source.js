@@ -112,4 +112,3 @@ function chooseText(){
 	sel = Math.floor((Math.random() * phrasesCount) + 1)
 	return gameText != phrases[sel] ? phrases[sel] : chooseText();
 }
-
