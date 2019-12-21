@@ -16,6 +16,7 @@
 	</div>
 
 	<div class="container" id='gamecontainer'>
+	<div class='container' id='gtwrapper'>
 		<div class="row" id='gtcontainer'>
 			<h3 
 			style="color: black;
@@ -30,7 +31,7 @@
 			<table class="table" hidden>
 			</table>
 		</div>
-
+	</div>
 		<br>
 		<div class='container' id='restcontainer'>
 				<input type='text' class="form-control form-rounded" id="gameinput" placeholder='Start typing to play...' oninput="GameLoop()">
@@ -44,6 +45,20 @@
 			<h4 id='best'>Your best: ?</h4>
 			<h4 id='average'>Your average: ?</h4>
 			<a href='https://github.com/jacobcritch/' style="font-size: 80%;">by Jacob Critch</a>
+			
+			<div id='leaderboard-container'>
+				<table class='table' id='leaderboard'> 
+				<thead>
+						<tr>
+							<th scope="col">#</th>
+							<th scope="col">WPM</th>
+							<th scope="col">Name</th>
+						</tr>
+					</thead>
+					<tbody>
+					</tbody>
+				</table>
+			</div>
 		</div>
 	</div>
 </div>
@@ -66,22 +81,7 @@
 
 <!-- Add Firebase products that you want to use -->
 <script src="https://www.gstatic.com/firebasejs/7.6.0/firebase-firestore.js"></script>
-<script>
-	// Your web app's Firebase configuration
-	var firebaseConfig = {
-		apiKey: "AIzaSyAY2-U-wrArWEnxUiTAeoTbrJI0_qkCuTs",
-		authDomain: "typebeast-f9c80.firebaseapp.com",
-		databaseURL: "https://typebeast-f9c80.firebaseio.com",
-		projectId: "typebeast-f9c80",
-		storageBucket: "typebeast-f9c80.appspot.com",
-		messagingSenderId: "968716336099",
-		appId: "1:968716336099:web:d4ea07f043a5976198bed6",
-		measurementId: "G-2BJQ9VB3RY"
-	};
-	// Initialize Firebase
-	firebase.initializeApp(firebaseConfig);
-	const db = firebase.firestore();
-</script>
-<script type="text/javascript" src="main.js"></script>
+
+<script type="text/javascript" src="main_source.js"></script>
 </body>
 </html>

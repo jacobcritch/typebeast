@@ -1,8 +1,23 @@
+// Your web app's Firebase configuration
+var firebaseConfig = {
+	apiKey: "AIzaSyAY2-U-wrArWEnxUiTAeoTbrJI0_qkCuTs",
+	authDomain: "typebeast-f9c80.firebaseapp.com",
+	databaseURL: "https://typebeast-f9c80.firebaseio.com",
+	projectId: "typebeast-f9c80",
+	storageBucket: "typebeast-f9c80.appspot.com",
+	messagingSenderId: "968716336099",
+	appId: "1:968716336099:web:d4ea07f043a5976198bed6",
+	measurementId: "G-2BJQ9VB3RY"
+};
+// Initialize Firebase //
+firebase.initializeApp(firebaseConfig);
+var firestore = firebase.firestore();
 var gameText = '';
 var wpmAttemptsArr = [];
 var best = 0;
 var avg = 0;
 var sum = 0;
+leaderboardInit();
 Reset();
 
 function Reset(){
@@ -23,16 +38,21 @@ function Reset(){
 }
 
 function GameLoop(){	
-	if (playing === false){playing = true; document.getElementById('gameinput').placeholder = ''; startTime = new Date();}
+	if (playing === false)
+		{playing = true; 
+		document.getElementById('gameinput').placeholder = ''; 
+		startTime = new Date();}
 	inputElement = document.getElementById('gameinput');
 	input = inputElement.value;
 	
-	if ( (input === gameTextArr[0] + " ") || (input === gameTextArrOrg[gameTextArrLength-1] && wordCount===gameTextArrLength-1) ) {
+	if ( (input === gameTextArr[0] + " ") || (input === gameTextArrOrg[gameTextArrLength-1] // If input === prompted word
+	&& wordCount===gameTextArrLength-1) ) {
 		wordCount += 1;
 		gameTextArr.shift();
-		document.getElementById('gametext').innerHTML = gameTextArr.join(' ')
-		document.getElementById('gameinput').value = ""
-		if (wordCount === gameTextArrLength){
+		document.getElementById('gametext').innerHTML = gameTextArr.join(' ');
+		document.getElementById('gameinput').value = "";
+		
+		if (wordCount === gameTextArrLength){ // If game is over do =>
 			endTime = new Date();
 			document.getElementById('gameinput').disabled = true;
 			$('#gameinput').fadeOut();
@@ -49,9 +69,89 @@ function GameLoop(){
 			document.getElementById('average').innerHTML = 'Your average: ' + avg.toString().substr(0,5);
 			document.getElementById('wpm').style.fontSize = '4rem';
 			document.getElementById('gametext').innerHTML = 'Good job!';
-			wordCount = 0;
+			displayScoreEntryForm()
 		}
 	}
+}
+
+function displayScoreEntryForm(){
+	let lbInput = document.createElement('form');
+	lbInput.setAttribute('id', 'lbInput');
+	lbInput.setAttribute('onsubmit', 'scoreFormSubmit(this.name.value); return false;')
+	lbInput.innerHTML = 
+	'<input type="text" name="name"></input>						 \
+	<input type="submit" value="Submit score"></input				 \
+	'
+	let lbInputLabel = document.createElement('label');
+	lbInputLabel.setAttribute('id', 'lbInputLabel')
+	lbInputLabel.innerHTML = '<h5>Enter your name to submit your best score for the leaderboard:</h5>';
+	document.getElementById('gtwrapper').appendChild(lbInputLabel);
+	document.getElementById('gtwrapper').appendChild(lbInput);
+}
+
+function deleteScoreEntryForm(){
+	document.getElementById('lbInput').outerHTML = "";
+	document.getElementById('lbInputLabel').outerHTML = "";
+}
+
+function scoreFormSubmit(submittedName) {
+	submittedWPM = best.toString().substr(0,5);
+	firestore.collection("leaderboard").doc(submittedName.toString()).set({
+		name: submittedName,
+		wpm: submittedWPM,
+	})
+	.then(function() {
+		deleteScoreEntryForm();
+		//leaderboardInit();
+	})
+	.catch(function(error) {
+		console.error("Error writing score.", error);
+	});
+	alert('Score of ' + WPM + ' submitted to leaderboard for: ' + submittedName)
+}
+
+function leaderboardInit(){
+	let lb = document.getElementById('leaderboard');
+	/*if (lb.rows.length > 1) {
+		for (let i=0; i<=lb.rows.length; i++) {
+			console.log(i)
+			lb.deleteRow(i+1)
+		}
+	}*/
+	var docsArr = [];
+	var collectionSize;
+	firestore.collection("leaderboard")
+		.orderBy('wpm', 'desc').get().then(function(querySnapshot) {
+			return new Promise(function(resolve, reject) {
+			var collectionSize = querySnapshot.size;
+			querySnapshot.forEach((doc) => {
+				docsArr.push(doc.data())
+				resolve(collectionSize); })
+				//docsArr.sort((a, b) => (a.wpm > b.wpm) ? 1 : -1)
+			})
+		}).then(function(size) {
+			//alert(size)
+			//console.log(docsArr)
+			//let lb = document.getElementById('leaderboard');
+			if (lb.rows.length > 1) {
+				for (let x=0; x<lb.rows.length; x++) {
+					console.log(x)
+					lb.deleteRow(x+1)
+				}
+			}
+			for (let i=0; i<size; i++){
+				//alert(i)
+				let lbrow = lb.insertRow(i+1);
+				let cell1 = lbrow.insertCell(0);
+				let cell2 = lbrow.insertCell(1);	
+				let cell3 = lbrow.insertCell(2);
+				cell1.innerHTML = i+1;
+				cell2.innerHTML = docsArr[i]['wpm'];	
+				cell3.innerHTML = docsArr[i]['name'];
+			}
+		}).catch(function(error) {
+				console.log("Error getting documents: ", error);
+	});
 }
 
 function chooseText(){

@@ -47,6 +47,20 @@ body {
 	align-content: center;
 }
 
+#leaderboard {
+	text-align: center;
+	margin-top: 10%;
+	
+
+}
+
+#leaderboard-container {
+	align-items: center;
+	
+
+	
+}
+
 .form-rounded {
 border-radius: 1rem;
 font-size: 1.5rem;
