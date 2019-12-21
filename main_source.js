@@ -91,11 +91,16 @@ function displayScoreEntryForm(){
 }
 
 function deleteScoreEntryForm(){
-	document.getElementById('lbInput').outerHTML = "";
-	document.getElementById('lbInputLabel').outerHTML = "";
+	if (document.getElementById('lbInput')){
+		document.getElementById('lbInput').outerHTML = "";
+		}
+	if (document.getElementById('lbInputLabel')){
+		document.getElementById('lbInputLabel').outerHTML = "";
+		}
 }
 
 function scoreFormSubmit(submittedName) {
+	submittedName = sanitize(submittedName)
 	submittedWPM = best.toString().substr(0,5);
 	firestore.collection("leaderboard").doc(submittedName.toString()).set({
 		name: submittedName,
@@ -212,4 +217,17 @@ function chooseText(){
 	for (var i in phrases) phrasesCount++;
 	sel = Math.floor((Math.random() * phrasesCount) + 1)
 	return gameText != phrases[sel] ? phrases[sel] : chooseText();
+}
+
+function sanitize(string) {
+	const map = {
+			'&': '&amp;',
+			'<': '&lt;',
+			'>': '&gt;',
+			'"': '&quot;',
+			"'": '&#x27;',
+			"/": '&#x2F;',
+	};
+	const reg = /[&<>"'/]/ig;
+	return string.replace(reg, (match)=>(map[match]));
 }
