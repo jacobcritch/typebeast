@@ -24,6 +24,7 @@ function Reset(){
 	wordCount = 0;
 	playing = false;
 	sum = 0;
+	deleteScoreEntryForm();
 	$('#gameinput').fadeIn();
 	document.getElementById('gameinput').placeholder = 'Start typing to play...';
 	document.getElementById('gameinput').value = "";
