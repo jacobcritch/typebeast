@@ -100,7 +100,7 @@ function deleteScoreEntryForm(){
 }
 
 function scoreFormSubmit(submittedName) {
-	submittedName = sanitize(submittedName)
+	submittedName = sanitize(submittedName);
 	submittedWPM = best.toString().substr(0,5);
 	firestore.collection("leaderboard").doc(submittedName.toString()).set({
 		name: submittedName,
