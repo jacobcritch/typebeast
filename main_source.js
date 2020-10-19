@@ -102,6 +102,7 @@ function deleteScoreEntryForm(){
 function scoreFormSubmit(submittedName) {
 	submittedName = sanitize(submittedName);
 	submittedWPM = best.toString().substr(0,5);
+	submittedWPM = parseFloat(submittedWPM);
 	firestore.collection("leaderboard").doc(submittedName.toString()).set({
 		name: submittedName,
 		wpm: submittedWPM,
@@ -127,7 +128,7 @@ function leaderboardInit(){
 	var docsArr = [];
 	var collectionSize;
 	firestore.collection("leaderboard")
-		.orderBy('name').get().then(function(querySnapshot) {
+		.orderBy('wpm', 'desc').get().then(function(querySnapshot) {
 			return new Promise(function(resolve, reject) {
 			var collectionSize = querySnapshot.size;
 			querySnapshot.forEach((doc) => {
