@@ -127,7 +127,7 @@ function leaderboardInit(){
 	var docsArr = [];
 	var collectionSize;
 	firestore.collection("leaderboard")
-		.orderBy('wpm', 'desc').get().then(function(querySnapshot) {
+		.orderBy('name').get().then(function(querySnapshot) {
 			return new Promise(function(resolve, reject) {
 			var collectionSize = querySnapshot.size;
 			querySnapshot.forEach((doc) => {
@@ -155,6 +155,7 @@ function leaderboardInit(){
 				cell2.innerHTML = docsArr[i]['wpm'];	
 				cell3.innerHTML = docsArr[i]['name'];
 			}
+			console.log(docsArr);
 		}).catch(function(error) {
 				console.log("Error getting documents: ", error);
 	});
