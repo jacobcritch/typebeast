@@ -1,5 +1,6 @@
-// Your web app's Firebase configuration
-var firebaseConfig = {
+// Firebase configuration
+
+const firebaseConfig = {
   apiKey: "AIzaSyAY2-U-wrArWEnxUiTAeoTbrJI0_qkCuTs",
   authDomain: "typebeast-f9c80.firebaseapp.com",
   databaseURL: "https://typebeast-f9c80.firebaseio.com",
@@ -9,7 +10,9 @@ var firebaseConfig = {
   appId: "1:968716336099:web:d4ea07f043a5976198bed6",
   measurementId: "G-2BJQ9VB3RY",
 };
-// Initialize Firebase //
+
+// Initialize Firebase
+
 firebase.initializeApp(firebaseConfig);
 var firestore = firebase.firestore();
 var gameText = "";
@@ -125,7 +128,6 @@ function scoreFormSubmit(submittedName) {
     })
     .then(function () {
       deleteScoreEntryForm();
-      //leaderboardInit();
     })
     .catch(function (error) {
       console.error("Error writing score.", error);
@@ -135,12 +137,6 @@ function scoreFormSubmit(submittedName) {
 
 function leaderboardInit() {
   let lb = document.getElementById("leaderboard");
-  /*if (lb.rows.length > 1) {
-		for (let i=0; i<=lb.rows.length; i++) {
-			console.log(i)
-			lb.deleteRow(i+1)
-		}
-	}*/
   var docsArr = [];
   var collectionSize;
   firestore
@@ -149,18 +145,14 @@ function leaderboardInit() {
     .get()
     .then(function (querySnapshot) {
       return new Promise(function (resolve, reject) {
-        var collectionSize = querySnapshot.size;
+        collectionSize = querySnapshot.size;
         querySnapshot.forEach((doc) => {
           docsArr.push(doc.data());
           resolve(collectionSize);
         });
-        //docsArr.sort((a, b) => (a.wpm > b.wpm) ? 1 : -1)
       });
     })
     .then(function (size) {
-      //alert(size)
-      //console.log(docsArr)
-      //let lb = document.getElementById('leaderboard');
       if (lb.rows.length > 1) {
         for (let x = 0; x < lb.rows.length; x++) {
           console.log(x);
@@ -168,14 +160,13 @@ function leaderboardInit() {
         }
       }
       for (let i = 0; i < size; i++) {
-        //alert(i)
         let lbrow = lb.insertRow(i + 1);
         let cell1 = lbrow.insertCell(0);
         let cell2 = lbrow.insertCell(1);
         let cell3 = lbrow.insertCell(2);
-        cell1.innerHTML = i + 1;
-        cell2.innerHTML = docsArr[i]["wpm"];
-        cell3.innerHTML = docsArr[i]["name"];
+        cell1.innerText = i + 1;
+        cell2.innerText = docsArr[i]["wpm"];
+        cell3.innerText = docsArr[i]["name"];
       }
       console.log(docsArr);
     })
@@ -240,17 +231,4 @@ function chooseText() {
   for (var i in phrases) phrasesCount++;
   sel = Math.floor(Math.random() * phrasesCount + 1);
   return gameText != phrases[sel] ? phrases[sel] : chooseText();
-}
-
-function sanitize(string) {
-  const map = {
-    "&": "&amp;",
-    "<": "&lt;",
-    ">": "&gt;",
-    '"': "&quot;",
-    "'": "&#x27;",
-    "/": "&#x2F;",
-  };
-  const reg = /[&<>"'/]/gi;
-  return string.replace(reg, (match) => map[match]);
 }
